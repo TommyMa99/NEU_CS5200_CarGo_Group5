@@ -4,6 +4,9 @@
 
 This is the repository we prepared for **CS5200** - Database Management System - 2022 spring. You will see all the code we built for this course project here.
 
+### Members:
+Bingfan Tian, Bo Chen, Jianqing Ma, Kaiwen Zhou, Qihui Liu, Sen Yan
+
 ## Project Milestone 1: Definition
 
 ### Project overview
