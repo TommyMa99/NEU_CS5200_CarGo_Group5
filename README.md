@@ -30,4 +30,4 @@ and buyers who are unhappy with current insane used car market and sellers who r
 [Link](https://www.kaggle.com/tunguz/used-car-auction-prices)
 
 ## Project Milestone 2: Relational Model and Data
-<img src="https://raw.githubusercontent.com/BingfanTian96/NEU_CS5200_CarGo_Group5/main/PM2/CarGo_UML_V1.0.png" width="800" />
+<img src="https://raw.githubusercontent.com/BingfanTian96/NEU_CS5200_CarGo_Group5/main/PM2/CarGo_UML_V2.0.png" width="1000" />
