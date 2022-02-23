@@ -111,7 +111,9 @@ create table Reviews(
     BuyerId int,
     SellerId int,
     constraint pk_Review_ReviewId PRIMARY KEY (ReviewId),
-    constraint fk_Review_BuyerId foreign key (BuyerId) references Buyer(BuyerId),
+    constraint fk_Review_BuyerId foreign key (BuyerId) references Buyers(BuyerId),
+    constraint fk_Review_SellerId foreign key (SellerId) references Sellers(SellerId)
+);
 
 CREATE TABLE Messages (
 	MessageId INT AUTO_INCREMENT,
@@ -121,7 +123,18 @@ CREATE TABLE Messages (
 	ToId INT,
 	CONSTRAINT pk_Messages_MessageId PRIMARY KEY(MessageId),
 	CONSTRAINT fk_Messages_FromId FOREIGN KEY(FromId) REFERENCES Users(UserId)
+	ON UPDATE CASCADE ON DELETE SET NULL,
+	CONSTRAINT fk_Messages_ToId FOREIGN KEY(ToId) REFERENCES Users(UserId)
+	ON UPDATE CASCADE ON DELETE SET NULL
 );
+
+CREATE TABLE Saves(
+	SaveId INT AUTO_INCREMENT,
+	Vin VARCHAR(255),
+	UserId INT,
+	CONSTRAINT pk_Saves_SaveId PRIMARY KEY(SaveId),
+	CONSTRAINT fk_Saves_Vin FOREIGN KEY(Vin) REFERENCES Cars(Vin)
+	ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT fk_Saves_UserId FOREIGN KEY(UserId) REFERENCES Buyers(BuyerId)
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
