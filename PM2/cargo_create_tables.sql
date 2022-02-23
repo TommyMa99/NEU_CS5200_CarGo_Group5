@@ -6,11 +6,11 @@ DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Saves;
 DROP TABLE IF EXISTS Cars;
 DROP TABLE IF EXISTS Searches;
-DROP TABLE IF EXISTS Companies;
 DROP TABLE IF EXISTS Sellers;
 DROP TABLE IF EXISTS Buyers;
 DROP TABLE IF EXISTS Admins;
 DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Companies;
 
 
 CREATE TABLE Companies (
@@ -79,7 +79,7 @@ create table Searches(
     Interior varchar(255),
     UserId int,
     constraint pk_Search_SearchId primary key (SearchId),
-    constraint fk_Search_UserId foreign key (UserId) references Buyer(BuyerId)
+    constraint fk_Search_UserId foreign key (UserId) references Buyers(BuyerId)
 );
 
 create table Cars(
@@ -100,7 +100,7 @@ create table Cars(
     SellerId int,
     SaleDate varchar(255),
     constraint pk_Search_Vin primary key (Vin),
-    constraint fk_Search_SellerId foreign key (SellerId) references Seller(SellerId)
+    constraint fk_Search_SellerId foreign key (SellerId) references Sellers(SellerId)
 );
 
 create table Reviews(
@@ -112,5 +112,18 @@ create table Reviews(
     SellerId int,
     constraint pk_Review_ReviewId PRIMARY KEY (ReviewId),
     constraint fk_Review_BuyerId foreign key (BuyerId) references Buyer(BuyerId),
-    constraint fk_Review_SellerId foreign key (SellerId) references Seller(SellerId)
+
+CREATE TABLE Messages (
+	MessageId INT AUTO_INCREMENT,
+	SentTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	Content VARCHAR(1023) NOT NULL,
+	FromId INT,
+	ToId INT,
+	CONSTRAINT pk_Messages_MessageId PRIMARY KEY(MessageId),
+	CONSTRAINT fk_Messages_FromId FOREIGN KEY(FromId) REFERENCES Users(UserId)
 );
+	CONSTRAINT fk_Saves_UserId FOREIGN KEY(UserId) REFERENCES Buyers(BuyerId)
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
