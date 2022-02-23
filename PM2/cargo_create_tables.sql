@@ -62,3 +62,55 @@ CREATE TABLE Sellers (
   REFERENCES Companies(CompanyId)
   ON UPDATE CASCADE ON DELETE SET NULL
 );
+
+
+create table Searches(
+    SearchId int auto_increment,
+    Year int,
+    Make varchar(255),
+    Model varchar(255),
+    Trim varchar(255),
+    Body varchar(255),
+    Transmission varchar(255),
+    State varchar(255),
+    Odometer int,
+    CarCondition double,
+    Color varchar(255),
+    Interior varchar(255),
+    UserId int,
+    constraint pk_Search_SearchId primary key (SearchId),
+    constraint fk_Search_UserId foreign key (UserId) references Buyer(BuyerId)
+);
+
+create table Cars(
+    Vin varchar(255),
+    Year int,
+    Make varchar(255),
+    Model varchar(255),
+    Trim varchar(255),
+    Body varchar(255),
+    Transmission varchar(255),
+    State varchar(255),
+    Odometer int,
+    CarCondition double,
+    Color varchar(255),
+    Interior varchar(255),
+    Mmr int,
+    SellingPrice double,
+    SellerId int,
+    SaleDate varchar(255),
+    constraint pk_Search_Vin primary key (Vin),
+    constraint fk_Search_SellerId foreign key (SellerId) references Seller(SellerId)
+);
+
+create table Reviews(
+    ReviewId int auto_increment,
+    Date timestamp,
+    ReviewContent varchar(255),
+    Rating double,
+    BuyerId int,
+    SellerId int,
+    constraint pk_Review_ReviewId PRIMARY KEY (ReviewId),
+    constraint fk_Review_BuyerId foreign key (BuyerId) references Buyer(BuyerId),
+    constraint fk_Review_SellerId foreign key (SellerId) references Seller(SellerId)
+);
