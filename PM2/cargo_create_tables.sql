@@ -1,3 +1,10 @@
+# Group 5 - CarGo
+# Bingfan Tian, Bo Chen, 
+# Jianqing Ma, Kaiwen Zhou, 
+# Qihui Liu, Sen Yan
+# CS5200 - PM2
+# 2/24/2022
+
 CREATE SCHEMA IF NOT EXISTS CarGoApplication;
 USE CarGoApplication;
 
@@ -96,9 +103,7 @@ create table Cars(
     Color varchar(255),
     Interior varchar(255),
     Mmr int,
-    SellingPrice double,
     SellerId int,
-    SaleDate varchar(255),
     constraint pk_Search_Vin primary key (Vin),
     constraint fk_Search_SellerId foreign key (SellerId) references Sellers(SellerId)
 );
@@ -138,5 +143,3 @@ CREATE TABLE Saves(
 	CONSTRAINT fk_Saves_UserId FOREIGN KEY(UserId) REFERENCES Buyers(BuyerId)
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-
