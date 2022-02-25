@@ -105,4 +105,28 @@ select Vin, Year, Make, Model,
         Color, Interior, Mmr
 from Imports;
 
+# insert data into dealer companies
+DROP TABLE IF EXISTS Imports_temp;
+create table Imports_temp like Imports;
+
+insert into Imports_temp
+select *
+from Imports
+where Seller not in (
+      SELECT Seller
+		FROM Imports
+		GROUP BY Seller
+		HAVING COUNT(Seller) > 1
+     );
+
+drop table Imports;
+
+alter table Imports_temp rename to Imports;
+
+# insert data into Companies
+insert into Companies(
+	CompanyName, Description)
+select Seller, Seller
+from Imports;
+
 drop table Imports;
