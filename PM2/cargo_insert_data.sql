@@ -130,3 +130,79 @@ select Seller, Seller
 from Imports;
 
 drop table Imports;
+
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Tony', 'Bruce', 'tony.bruce@gmail.com', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Bingfan', 'Tian', 'tian.bin@gmail.com', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Bo', 'Chen', 'chen.bo@gmail.edu', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Sen', 'Yan', 'yan.sen@gmail.com', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Kaiwen', 'Zhou', 'zhou.kai@gmail.com', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Qihui', 'Liu', 'liu.qi@gmail.com', 'passwords');
+INSERT INTO Users(FirstName, LastName, Email, Password)
+	VALUES('Jianqing', 'Ma', 'ma.jian@gmail.com', 'passwords');
+    
+INSERT INTO Admins(UserId)
+	VALUES(1);
+    
+INSERT INTO Buyers(BuyerId, DOB, ZIP)
+	VALUES(2, '1996.10.19', 98103);
+INSERT INTO Buyers(BuyerId, DOB, ZIP)
+	VALUES(3, '1999.08.21', 98115);
+INSERT INTO Buyers(BuyerId, DOB, ZIP)
+	VALUES(4, '1997.02.02', 98104);
+    
+INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+	VALUES(5, 1, 98103, 'Address', 'Introduction');
+INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+	VALUES(6, 1, 98103, 'Address', 'Introduction');
+INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+	VALUES(7, 2, 98115, 'Address', 'Introduction');
+    
+INSERT INTO Saves(UserId, Vin)
+	VALUES(2, '1c3ccceg5fn565081');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(2, '1c3cdfbb0fd227486');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(2, '1c3cccag8fn516513');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(2, '1fm5k7f86fga20478');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1fm5k8f82fga20581');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1c3ccceg5fn565081');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1g11c5sl8ff191035');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1gc1kue87ff109372');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1gnkrgkd2fj106435');
+INSERT INTO Saves(UserId, Vin)
+	VALUES(3, '1gkkrrkd7fj120243');
+
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 2, 5);
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 3, 5);
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 3, 6);
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 4, 7);
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 4, 5);
+INSERT INTO Messages(Content, FromId, ToId)
+	VALUES('This is a message', 4, 6);
+    
+INSERT INTO Reviews(ReviewContent, Rating, BuyerId, SellerId)
+	VALUES('This is a content', 5.0, 2, 5);
+INSERT INTO Reviews(ReviewContent, Rating, BuyerId, SellerId)
+	VALUES('This is a content', 4.0, 2, 6);
+INSERT INTO Reviews(ReviewContent, Rating, BuyerId, SellerId)
+	VALUES('This is a content', 4.5, 3, 5);
+INSERT INTO Reviews(ReviewContent, Rating, BuyerId, SellerId)
+	VALUES('This is a content', 3.0, 4, 7);
+    
