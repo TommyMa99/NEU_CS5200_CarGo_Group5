@@ -42,15 +42,15 @@
 
 	<main> <section class="py-5 text-center container">
 	<div class="container-fluid">
-		<form class="d-flex">
+		<form class="d-flex" action="/Cargo/search" method="GET">
 			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="Year" aria-label="year">
-			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="Make" aria-label="make">
-			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="Model" aria-label="model">
-			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="State" aria-label="state">
+				placeholder="Year" aria-label="year" name="year"> <input
+				class="form-control form-control-lg me-2" type="search"
+				placeholder="Make" aria-label="make" name="make"> <input
+				class="form-control form-control-lg me-2" type="search"
+				placeholder="Model" aria-label="model" name="model"> <input
+				class="form-control form-control-lg me-2" type="search"
+				placeholder="State" aria-label="state" name="state">
 			<button class="btn btn-outline-primary" type="submit">Search</button>
 		</form>
 	</div>
@@ -60,125 +60,36 @@
 		<div class="container">
 
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
+				<c:forEach items="${cars}" var="car">
+					<div class="col">
+						<div class="card shadow-sm">
+							<div class="card-body">
+								<h4 class="card-title">
+									<c:out value="${car.getMake()}" />
+									<c:out value="${car.getModel()}" />
+									</h5>
+									<h5 class="card-title mb-3 text-muted">
+										$&nbsp<c:out value="${car.getMmr()}" />
 										</h6>
+										<h5 class="card-subtitle mb-3 text-muted">
+											<c:out value="${car.getOdometer()}" />&nbsp Miles
+											</h6>
 
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
+											<p class="card-text">Some quick example text to build on
+												the card title and make up the bulk of the card's content.</p>
+											<a href="#" class="card-link">Details</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
-										</h6>
 
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
-										</h6>
 
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
-										</h6>
+				</c:forEach>
 
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
-										</h6>
-
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<div class="card-body">
-							<h4 class="card-title">
-								2019 Ford F250 XLT
-								</h5>
-								<h5 class="card-title mb-3 text-muted">
-									$26,998
-									</h6>
-									<h5 class="card-subtitle mb-3 text-muted">
-										56K mi
-										</h6>
-
-										<p class="card-text">Some quick example text to build on
-											the card title and make up the bulk of the card's content.</p>
-										<a href="#" class="card-link">Details</a>
-						</div>
-					</div>
-				</div>
-				
-				</div>
 
 			</div>
+
 		</div>
+	</div>
 	</div>
 
 	</main>
