@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import car.model.Cars;
 import car.model.Companies;
@@ -562,6 +564,44 @@ public class CarDao {
 		return cars;
 	}
 	
+	public List<Cars> getCarByParameters(int year, String make, String model, String state) throws SQLException {
+		List<Cars> cars = new ArrayList<Cars>();
+		String select = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+				+ "FROM Cars "
+				+ "WHERE Year=? AND Make=? AND Model=? AND State=?;";
+		
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(select);
+			selectStmt.setInt(1, year);
+			selectStmt.setString(2, make);
+			selectStmt.setString(3, model);
+			selectStmt.setString(4, state);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				Cars car = getObj(results);
+				cars.add(car);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return cars;
+	}
+	
 	public Cars updateCar(Cars car, String trim, String state, int odometer, double carCondition, String color, String interior, int mmr, Sellers seller) throws SQLException {
 		String updateCar = "UPDATE Cars SET Trim=?, State=?, Odometer=?, CarCondition=?, Color=?, Interior=?, Mmr=?, UserId=? WHERE Vin=?;";
 		Connection connection = null;
@@ -623,6 +663,8 @@ public class CarDao {
 			}
 		}
 	}
+	
+	
 	
 	private Cars getObj(ResultSet results) {
 		SellerDao sellerDao = SellerDao.getInstance();
