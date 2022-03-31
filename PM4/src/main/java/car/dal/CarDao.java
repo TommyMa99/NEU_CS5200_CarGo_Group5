@@ -4,15 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import car.model.Cars;
-import car.model.Companies;
 import car.model.Sellers;
 
 
@@ -40,8 +34,8 @@ public class CarDao {
 	
 	public Cars create(Cars car) throws SQLException {
 		String insertCar = "INSERT INTO Cars(Vin,Year,Make,Model,Trim,Body,"
-				+ "Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+				+ "Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -60,7 +54,8 @@ public class CarDao {
 			insertStmt.setString(11,car.getColor());
 			insertStmt.setString(12,car.getInterior());
 			insertStmt.setInt(13,car.getMmr());
-			insertStmt.setInt(14,car.getSeller().getUserId());
+			insertStmt.setInt(14, car.getSellingPrice());
+			insertStmt.setInt(15,car.getSeller().getUserId());
 			insertStmt.executeUpdate();
 			return car;
 		} catch (SQLException e) {
@@ -77,7 +72,7 @@ public class CarDao {
 	}
 	
 	public Cars getCarByVin(String vin) throws SQLException {
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Vin=?;";
 		Connection connection = null;
@@ -111,7 +106,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByYear(int year) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Year=?;";
 		
@@ -124,7 +119,9 @@ public class CarDao {
 			selectStmt.setInt(1, year);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
+
 				Cars car = getObj(results);
+
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -146,7 +143,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByMake(String make) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Make=?;";
 		
@@ -181,7 +178,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByModel(String model) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Model=?;";
 		
@@ -216,7 +213,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByTrim(String trim) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Trim=?;";
 		
@@ -251,7 +248,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByBody(String body) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Body=?;";
 		
@@ -286,7 +283,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByTransmission(String transmission) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Transmission=?;";
 		
@@ -321,7 +318,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByState(String state) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE State=?;";
 		
@@ -356,7 +353,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByOdometer(int odo) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Odometer=?;";
 		
@@ -391,7 +388,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByCondition(double condition) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE CarCondition=?;";
 		
@@ -426,7 +423,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByColor(String color) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Color=?;";
 		
@@ -461,7 +458,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByInterior(String interior) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Interior=?;";
 		
@@ -496,7 +493,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByMmr(int mmr) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Mmr=?;";
 		
@@ -531,7 +528,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByUserId(int userId) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE UserId=?;";
 		
@@ -566,7 +563,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByParameters(int year, String make, String model, String state) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String select = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String select = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Year=? AND Make=? AND Model=? AND State=?;";
 		
@@ -602,8 +599,8 @@ public class CarDao {
 		return cars;
 	}
 	
-	public Cars updateCar(Cars car, String trim, String state, int odometer, double carCondition, String color, String interior, int mmr, Sellers seller) throws SQLException {
-		String updateCar = "UPDATE Cars SET Trim=?, State=?, Odometer=?, CarCondition=?, Color=?, Interior=?, Mmr=?, UserId=? WHERE Vin=?;";
+	public Cars updateCar(Cars car, String trim, String state, int odometer, double carCondition, String color, String interior, int mmr,int sellingPrice, Sellers seller) throws SQLException {
+		String updateCar = "UPDATE Cars SET Trim=?, State=?, Odometer=?, CarCondition=?, Color=?, Interior=?, Mmr=?, SellingPrice=?, UserId=? WHERE Vin=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -616,8 +613,9 @@ public class CarDao {
 			updateStmt.setString(5, color);
 			updateStmt.setString(6, interior);
 			updateStmt.setInt(7, mmr);
-			updateStmt.setInt(8, seller.getUserId());
-			updateStmt.setString(9, car.getVin());
+			updateStmt.setInt(8, sellingPrice);
+			updateStmt.setInt(9, seller.getUserId());
+			updateStmt.setString(10, car.getVin());
 			updateStmt.executeUpdate();
 			car.setTrim(trim);
 			car.setState(state);
@@ -626,6 +624,7 @@ public class CarDao {
 			car.setColor(color);
 			car.setInterior(interior);
 			car.setMmr(mmr);
+			car.setSellingPrice(sellingPrice);
 			car.setSeller(seller);
 			return car;
 		} catch (SQLException e) {
@@ -666,7 +665,7 @@ public class CarDao {
 	
 	
 	
-	private Cars getObj(ResultSet results) {
+	private Cars getObj(ResultSet results) throws SQLException {
 		SellerDao sellerDao = SellerDao.getInstance();
 		String resultVin = results.getString("Vin");
 		int resultYear = results.getInt("Year");
@@ -681,12 +680,13 @@ public class CarDao {
 		String resultColor = results.getString("Color");
 		String resultInterior = results.getString("Interior");
 		int resultMmr = results.getInt("Mmr");
+		int resultSellingPrice = results.getInt("SellingPrice");
 		int resultUserId = results.getInt("UserId");
-		Sellers seller = sellerDao.getSellerById(resultUserId);
+		Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 		Cars car = new Cars(resultVin,resultYear,
 				resultMake,resultModel,resultTrim,resultBody,
 				resultTransmission,resultState,resultOdometer,
-				resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				resultCarCondition,resultColor,resultInterior,resultMmr,resultSellingPrice,seller);
 		return car;
 	}
 }

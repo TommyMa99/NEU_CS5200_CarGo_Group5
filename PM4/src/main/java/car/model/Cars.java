@@ -322,6 +322,14 @@ public class Cars {
 	public void setSeller(Sellers seller) {
 		this.seller = seller;
 	}
+
+	public int getSellingPrice() {
+		return sellingPrice;
+	}
+
+	public void setSellingPrice(int sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
 	
 	
 }
