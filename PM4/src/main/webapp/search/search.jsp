@@ -44,7 +44,13 @@
 	<div class="container-fluid">
 		<form class="d-flex">
 			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="Search by make, model, or keyword" aria-label="Search">
+				placeholder="Year" aria-label="year">
+			<input class="form-control form-control-lg me-2" type="search"
+				placeholder="Make" aria-label="make">
+			<input class="form-control form-control-lg me-2" type="search"
+				placeholder="Model" aria-label="model">
+			<input class="form-control form-control-lg me-2" type="search"
+				placeholder="State" aria-label="state">
 			<button class="btn btn-outline-primary" type="submit">Search</button>
 		</form>
 	</div>
