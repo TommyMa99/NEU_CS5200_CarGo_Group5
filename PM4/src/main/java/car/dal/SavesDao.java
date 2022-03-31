@@ -133,7 +133,7 @@ public class SavesDao{
 		List<Cars> cars = new ArrayList<>();
 		String selectCarsFromSaves =
 			"SELECT Saves.Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,"
-			+ "CarConditon,Color,Interior,Mmr,SellerId" +
+			+ "CarConditon,Color,Interior,Mmr,SellingPrice,SellerId" +
 			"FROM Saves INNER JOIN ON Saves.Vin = Cars.Vin" +
 			"WHERE UserId=?;";
 		Connection connection = null;
@@ -160,10 +160,11 @@ public class SavesDao{
 				String color = results.getString("Color");
 				String interior = results.getString("Interior");
 				int mmr = results.getInt("Mmr");
+				int sellingPrice = results.getInt("SellingPrice");
 				int sellerId = results.getInt("SellerId");
 				Sellers seller = (Sellers) userDao.getUserByUserId(sellerId);
 				Cars car = new Cars(vin,year,make,model,trim,body,transmission,state,odometer,
-						carCondition,color,interior,mmr,seller);
+						carCondition,color,interior,mmr,sellingPrice,seller);
 				cars.add(car);
 			}
 		} catch (SQLException e) {

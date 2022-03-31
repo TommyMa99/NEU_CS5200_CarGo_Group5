@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import car.model.Cars;
 import car.model.Sellers;
 
@@ -35,8 +34,8 @@ public class CarDao {
 	
 	public Cars create(Cars car) throws SQLException {
 		String insertCar = "INSERT INTO Cars(Vin,Year,Make,Model,Trim,Body,"
-				+ "Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId) "
-				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+				+ "Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -55,7 +54,8 @@ public class CarDao {
 			insertStmt.setString(11,car.getColor());
 			insertStmt.setString(12,car.getInterior());
 			insertStmt.setInt(13,car.getMmr());
-			insertStmt.setInt(14,car.getSeller().getUserId());
+			insertStmt.setInt(14, car.getSellingPrice());
+			insertStmt.setInt(15,car.getSeller().getUserId());
 			insertStmt.executeUpdate();
 			return car;
 		} catch (SQLException e) {
@@ -72,7 +72,7 @@ public class CarDao {
 	}
 	
 	public Cars getCarByVin(String vin) throws SQLException {
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Vin=?;";
 		Connection connection = null;
@@ -83,27 +83,8 @@ public class CarDao {
 			selectStmt = connection.prepareStatement(selectCar);
 			selectStmt.setString(1, vin);
 			results = selectStmt.executeQuery();
-			SellerDao sellerDao = SellerDao.getInstance();
 			if(results.next()) {
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				return car;
 			}
 		} catch (SQLException e) {
@@ -125,7 +106,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByYear(int year) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Year=?;";
 		
@@ -138,26 +119,9 @@ public class CarDao {
 			selectStmt.setInt(1, year);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+
+				Cars car = getObj(results);
+
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -179,7 +143,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByMake(String make) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Make=?;";
 		
@@ -192,26 +156,7 @@ public class CarDao {
 			selectStmt.setString(1, make);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -233,7 +178,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByModel(String model) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Model=?;";
 		
@@ -246,26 +191,7 @@ public class CarDao {
 			selectStmt.setString(1, model);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -287,7 +213,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByTrim(String trim) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Trim=?;";
 		
@@ -300,26 +226,7 @@ public class CarDao {
 			selectStmt.setString(1, trim);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -341,7 +248,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByBody(String body) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Body=?;";
 		
@@ -354,26 +261,7 @@ public class CarDao {
 			selectStmt.setString(1, body);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -395,7 +283,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByTransmission(String transmission) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Transmission=?;";
 		
@@ -408,26 +296,7 @@ public class CarDao {
 			selectStmt.setString(1, transmission);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -449,7 +318,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByState(String state) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE State=?;";
 		
@@ -462,26 +331,7 @@ public class CarDao {
 			selectStmt.setString(1, state);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -503,7 +353,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByOdometer(int odo) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Odometer=?;";
 		
@@ -516,26 +366,7 @@ public class CarDao {
 			selectStmt.setInt(1, odo);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -557,7 +388,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByCondition(double condition) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE CarCondition=?;";
 		
@@ -570,26 +401,7 @@ public class CarDao {
 			selectStmt.setDouble(1, condition);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -611,7 +423,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByColor(String color) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Color=?;";
 		
@@ -624,26 +436,7 @@ public class CarDao {
 			selectStmt.setString(1, color);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -665,7 +458,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByInterior(String interior) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Interior=?;";
 		
@@ -678,26 +471,7 @@ public class CarDao {
 			selectStmt.setString(1, interior);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -719,7 +493,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByMmr(int mmr) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE Mmr=?;";
 		
@@ -732,26 +506,7 @@ public class CarDao {
 			selectStmt.setInt(1, mmr);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -773,7 +528,7 @@ public class CarDao {
 	
 	public List<Cars> getCarByUserId(int userId) throws SQLException {
 		List<Cars> cars = new ArrayList<Cars>();
-		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,UserId "
+		String selectCar = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
 				+ "FROM Cars "
 				+ "WHERE UserId=?;";
 		
@@ -786,26 +541,7 @@ public class CarDao {
 			selectStmt.setInt(1, userId);
 			results = selectStmt.executeQuery();
 			while(results.next()) {
-				SellerDao sellerDao = SellerDao.getInstance();
-				String resultVin = results.getString("Vin");
-				int resultYear = results.getInt("Year");
-				String resultMake = results.getString("Make");
-				String resultModel = results.getString("Model");
-				String resultTrim = results.getString("Trim");
-				String resultBody = results.getString("Body");
-				String resultTransmission = results.getString("Transmission");
-				String resultState = results.getString("State");
-				int resultOdometer = results.getInt("Odometer");
-				double resultCarCondition = results.getDouble("CarCondition");
-				String resultColor = results.getString("Color");
-				String resultInterior = results.getString("Interior");
-				int resultMmr = results.getInt("Mmr");
-				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
-				Cars car = new Cars(resultVin,resultYear,
-						resultMake,resultModel,resultTrim,resultBody,
-						resultTransmission,resultState,resultOdometer,
-						resultCarCondition,resultColor,resultInterior,resultMmr,seller);
+				Cars car = getObj(results);
 				cars.add(car);
 			}
 		} catch (SQLException e) {
@@ -825,8 +561,46 @@ public class CarDao {
 		return cars;
 	}
 	
-	public Cars updateCar(Cars car, String trim, String state, int odometer, double carCondition, String color, String interior, int mmr, Sellers seller) throws SQLException {
-		String updateCar = "UPDATE Cars SET Trim=?, State=?, Odometer=?, CarCondition=?, Color=?, Interior=?, Mmr=?, UserId=? WHERE Vin=?;";
+	public List<Cars> getCarByParameters(int year, String make, String model, String state) throws SQLException {
+		List<Cars> cars = new ArrayList<Cars>();
+		String select = "SELECT Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,CarCondition,Color,Interior,Mmr,SellingPrice,UserId "
+				+ "FROM Cars "
+				+ "WHERE Year=? AND Make=? AND Model=? AND State=?;";
+		
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(select);
+			selectStmt.setInt(1, year);
+			selectStmt.setString(2, make);
+			selectStmt.setString(3, model);
+			selectStmt.setString(4, state);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				Cars car = getObj(results);
+				cars.add(car);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return cars;
+	}
+	
+	public Cars updateCar(Cars car, String trim, String state, int odometer, double carCondition, String color, String interior, int mmr,int sellingPrice, Sellers seller) throws SQLException {
+		String updateCar = "UPDATE Cars SET Trim=?, State=?, Odometer=?, CarCondition=?, Color=?, Interior=?, Mmr=?, SellingPrice=?, UserId=? WHERE Vin=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -839,8 +613,9 @@ public class CarDao {
 			updateStmt.setString(5, color);
 			updateStmt.setString(6, interior);
 			updateStmt.setInt(7, mmr);
-			updateStmt.setInt(8, seller.getUserId());
-			updateStmt.setString(9, car.getVin());
+			updateStmt.setInt(8, sellingPrice);
+			updateStmt.setInt(9, seller.getUserId());
+			updateStmt.setString(10, car.getVin());
 			updateStmt.executeUpdate();
 			car.setTrim(trim);
 			car.setState(state);
@@ -849,6 +624,7 @@ public class CarDao {
 			car.setColor(color);
 			car.setInterior(interior);
 			car.setMmr(mmr);
+			car.setSellingPrice(sellingPrice);
 			car.setSeller(seller);
 			return car;
 		} catch (SQLException e) {
@@ -885,5 +661,32 @@ public class CarDao {
 				deleteStmt.close();
 			}
 		}
+	}
+	
+	
+	
+	private Cars getObj(ResultSet results) throws SQLException {
+		SellerDao sellerDao = SellerDao.getInstance();
+		String resultVin = results.getString("Vin");
+		int resultYear = results.getInt("Year");
+		String resultMake = results.getString("Make");
+		String resultModel = results.getString("Model");
+		String resultTrim = results.getString("Trim");
+		String resultBody = results.getString("Body");
+		String resultTransmission = results.getString("Transmission");
+		String resultState = results.getString("State");
+		int resultOdometer = results.getInt("Odometer");
+		double resultCarCondition = results.getDouble("CarCondition");
+		String resultColor = results.getString("Color");
+		String resultInterior = results.getString("Interior");
+		int resultMmr = results.getInt("Mmr");
+		int resultSellingPrice = results.getInt("SellingPrice");
+		int resultUserId = results.getInt("UserId");
+		Sellers seller = sellerDao.getSellerByUserId(resultUserId);
+		Cars car = new Cars(resultVin,resultYear,
+				resultMake,resultModel,resultTrim,resultBody,
+				resultTransmission,resultState,resultOdometer,
+				resultCarCondition,resultColor,resultInterior,resultMmr,resultSellingPrice,seller);
+		return car;
 	}
 }
