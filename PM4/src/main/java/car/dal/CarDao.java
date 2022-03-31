@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import car.model.Cars;
-import car.model.Companies;
 import car.model.Sellers;
 
 
@@ -102,7 +99,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -156,7 +153,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -210,7 +207,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -264,7 +261,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -318,7 +315,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -372,7 +369,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -426,7 +423,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -480,7 +477,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -534,7 +531,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -588,7 +585,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -642,7 +639,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -696,7 +693,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -750,7 +747,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
@@ -804,7 +801,7 @@ public class CarDao {
 				String resultInterior = results.getString("Interior");
 				int resultMmr = results.getInt("Mmr");
 				int resultUserId = results.getInt("UserId");
-				Sellers seller = sellerDao.getSellerById(resultUserId);
+				Sellers seller = sellerDao.getSellerByUserId(resultUserId);
 				Cars car = new Cars(resultVin,resultYear,
 						resultMake,resultModel,resultTrim,resultBody,
 						resultTransmission,resultState,resultOdometer,
