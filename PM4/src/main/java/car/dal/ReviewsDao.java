@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import car.model.Buyer;
 import car.model.Reviews;
+import car.model.Sellers;
+import car.model.User;
 
 
 public class ReviewsDao{
@@ -44,8 +47,8 @@ public class ReviewsDao{
 			
 			insertStmt.setString(2, review.getReviewContent());
 			insertStmt.setDouble(3, review.getRating());
-			insertStmt.setInt(4, review.getBuyerId());
-			insertStmt.setInt(5, review.getSellerId());
+			insertStmt.setInt(4, review.getBuyer().getUserId());
+			insertStmt.setInt(5, review.getSeller().getSelllerId());
 			insertStmt.executeUpdate();
 			
 			// Retrieve the auto-generated key and set it, so it can be used by the caller.
@@ -89,6 +92,7 @@ public class ReviewsDao{
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
+		UserDao userDao = UserDao.getInstance();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectReview);
@@ -102,7 +106,9 @@ public class ReviewsDao{
 				double rating = results.getDouble("Rating");
 				int buyerId = results.getInt("BuyerId");
 				int sellerId = results.getInt("SellerId");
-				Reviews review = new Reviews(resultReviewId,date,reviewContent,rating,buyerId,sellerId);
+				Buyer buyer = userDao.getUserByUserId(buyerId);
+				Sellers seller = userDao.getUserByUserId(sellerId);
+				Reviews review = new Reviews(resultReviewId,date,reviewContent,rating,buyer,seller);
 				return review;
 			}
 		} catch (SQLException e) {
@@ -135,6 +141,7 @@ public class ReviewsDao{
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
+		UserDao userDao = UserDao.getInstance();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectReview);
@@ -148,7 +155,9 @@ public class ReviewsDao{
 				double rating = results.getDouble("Rating");
 				int buyerId = results.getInt("BuyerId");
 				int sellerId = results.getInt("SellerId");
-				Reviews review = new Reviews(resultReviewId,date,reviewContent,rating,buyerId,sellerId);
+				Buyer buyer = userDao.getUserByUserId(buyerId);
+				Sellers seller = userDao.getUserByUserId(sellerId);
+				Reviews review = new Reviews(resultReviewId,date,reviewContent,rating,buyer,seller);
 				reviews.add(review);
 			}
 		} catch (SQLException e) {

@@ -17,10 +17,10 @@ public class Searches{
 	protected double carCondition;
 	protected String color;
 	protected String interior;
-	protected int userId;
+	protected User user;
 	//this constructor is used for reading records
 	public Searches(int searchId, int year, String make, String model, String trim, String body, String transmission,
-			String state, int odometer, double carCondition, String color, String interior, int userId) {
+			String state, int odometer, double carCondition, String color, String interior, User user) {
 		super();
 		this.searchId = searchId;
 		this.year = year;
@@ -34,7 +34,7 @@ public class Searches{
 		this.carCondition = carCondition;
 		this.color = color;
 		this.interior = interior;
-		this.userId = userId;
+		this.user = user;
 	}
 	
 	//this constructor is used for reference
@@ -46,7 +46,7 @@ public class Searches{
 
 	//this constructor is used for creating records
 	public Searches(int year, String make, String model, String trim, String body, String transmission, String state,
-			int odometer, double carCondition, String color, String interior, int userId) {
+			int odometer, double carCondition, String color, String interior, User user) {
 		super();
 		this.year = year;
 		this.make = make;
@@ -59,7 +59,7 @@ public class Searches{
 		this.carCondition = carCondition;
 		this.color = color;
 		this.interior = interior;
-		this.userId = userId;
+		this.user = user;
 	}
 	public int getSearchId() {
 		return searchId;
@@ -133,11 +133,11 @@ public class Searches{
 	public void setInterior(String interior) {
 		this.interior = interior;
 	}
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	
