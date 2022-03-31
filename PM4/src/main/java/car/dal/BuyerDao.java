@@ -81,7 +81,7 @@ public class BuyerDao extends UserDao{
 		}
 	}
 
-    public User getBuyerByUserId(int userId) throws SQLException {
+    public Buyer getBuyerByUserId(int userId) throws SQLException {
 		String selectBuyer = "SELECT UserId,DOB,ZIP FROM Buyers WHERE UserId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
