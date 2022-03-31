@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+
 /**
  * FindUsers is the primary entry point into the application.
  * 
@@ -36,9 +37,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/search")
 public class SearchTest extends HttpServlet {
 	
+	protected CarDao carDao;
 	
 	@Override
 	public void init() throws ServletException {
+		carDao = CarDao.getInstance();
 	}
 	
 	@Override
@@ -47,7 +50,6 @@ public class SearchTest extends HttpServlet {
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
         List<Cars> cars = new ArrayList<Cars>();
         
         // Retrieve and validate name.
@@ -56,8 +58,7 @@ public class SearchTest extends HttpServlet {
     	String make = req.getParameter("make");
     	String model = req.getParameter("model");
     	String state = req.getParameter("state");
-        
-        if (year == null year||
+        if (year == null || year.trim().isEmpty() ||
         		make == null || make.trim().isEmpty() ||
         		model == null || model.trim().isEmpty() ||
         		state == null || state.trim().isEmpty()) {
@@ -65,18 +66,58 @@ public class SearchTest extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-            	blogUsers = blogUsersDao.getBlogUsersFromFirstName(firstName);
+        		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + firstName);
+        	messages.put("success", "Displaying results for " + year + " " + make + " " + model + " in " + state);
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindUsers.jsp.
-        	messages.put("previousFirstName", firstName);
+        	messages.put("previousYear", year);
+        	messages.put("previousMake", make);
+        	messages.put("previousModel", model);
+        	messages.put("previousState", state);
+        	
         }
-        req.setAttribute("blogUsers", blogUsers);
+        req.setAttribute("cars", cars);
 
         req.getRequestDispatcher("/search/search.jsp").forward(req, resp);
 	}
+	
+	@Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+    		throws ServletException, IOException {
+        // Map for storing messages.
+        Map<String, String> messages = new HashMap<String, String>();
+        req.setAttribute("messages", messages);
+        List<Cars> cars = new ArrayList<Cars>();
+        
+        // Retrieve and validate name.
+        // firstname is retrieved from the form POST submission. By default, it
+        // is populated by the URL query string (in FindUsers.jsp).
+        String year = req.getParameter("year");
+    	String make = req.getParameter("make");
+    	String model = req.getParameter("model");
+    	String state = req.getParameter("state");
+    	if (year == null || year.trim().isEmpty() ||
+        		make == null || make.trim().isEmpty() ||
+        		model == null || model.trim().isEmpty() ||
+        		state == null || state.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid parameter.");
+        } else {
+        	// Retrieve BlogUsers, and store as a message.
+        	try {
+        		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
+            } catch (SQLException e) {
+    			e.printStackTrace();
+    			throw new IOException(e);
+            }
+        	messages.put("success", "Displaying results for " + year + " " + make + " " + model + " in " + state);
+        	
+        }
+    	req.setAttribute("cars", cars);
+        
+        req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
+    }
 }
