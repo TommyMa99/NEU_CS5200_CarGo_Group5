@@ -103,7 +103,7 @@ create table Cars(
     Color 			varchar(255),
     Interior 		varchar(255),
     Mmr 			int,
-    SellingPrice	Double,
+    SellingPrice	int,
     SellerId 		int,
     constraint pk_Search_Vin primary key (Vin),
     constraint fk_Search_SellerId foreign key (SellerId) references Sellers(SellerId)

@@ -20,6 +20,7 @@ public class Cars {
 	protected String color;
 	protected String interior;
 	protected int mmr;
+	protected int sellingPrice;
 	protected Sellers seller;
 	
 	/**
@@ -41,7 +42,7 @@ public class Cars {
 	 * @param seller The seller of the car.
 	 */
 	public Cars(String vin, int year, String make, String model, String trim, String body, String transmission,
-			String state, int odometer, double carCondition, String color, String interior, int mmr, Sellers seller) {
+			String state, int odometer, double carCondition, String color, String interior, int mmr, int sellingPrice,Sellers seller) {
 		this.vin = vin;
 		this.year = year;
 		this.make = make;
@@ -55,6 +56,7 @@ public class Cars {
 		this.color = color;
 		this.interior = interior;
 		this.mmr = mmr;
+		this.sellingPrice = sellingPrice;
 		this.seller = seller;
 	}
 	
