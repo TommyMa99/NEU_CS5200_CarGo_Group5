@@ -98,11 +98,11 @@ insert into Cars(
 	Vin, Year, Make, Model, 
     Trim, Body, Transmission, 
     State, Odometer, CarCondition, 
-    Color, Interior, Mmr)
+    Color, Interior, Mmr, SellingPrice)
 select Vin, Year, Make, Model, 
 		Trim, Body, Transmission, 
         State, Odometer, CarCondition, 
-        Color, Interior, Mmr
+        Color, Interior, Mmr, SellingPrice
 from Imports;
 
 # insert data into dealer companies
