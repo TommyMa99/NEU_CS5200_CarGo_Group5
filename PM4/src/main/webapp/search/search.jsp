@@ -75,8 +75,11 @@
 											<c:out value="${car.getOdometer()}" />&nbsp Miles
 											</h6>
 
-											<p class="card-text">Some quick example text to build on
-												the card title and make up the bulk of the card's content.</p>
+											<p class="card-text">
+												Color:&nbsp<c:out value="${car.getColor()}" />&nbsp&nbsp&nbsp&nbsp
+												Interior:&nbsp<c:out value="${car.getInterior()}" />&nbsp&nbsp&nbsp&nbsp
+												State:&nbsp<c:out value="${car.getState().toUpperCase()}" />&nbsp
+											</p>
 											<a href="#" class="card-link">Details</a>
 							</div>
 						</div>
