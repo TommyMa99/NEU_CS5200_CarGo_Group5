@@ -44,7 +44,39 @@ public class SearchTest extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		// Map for storing messages.
+        Map<String, String> messages = new HashMap<String, String>();
+        req.setAttribute("messages", messages);
+
+        List<Cars> cars = new ArrayList<Cars>();
         
+        // Retrieve and validate name.
+        // firstname is retrieved from the URL query string.
+        String year = req.getParameter("year");
+    	String make = req.getParameter("make");
+    	String model = req.getParameter("model");
+    	String state = req.getParameter("state");
+        
+        if (year == null year||
+        		make == null || make.trim().isEmpty() ||
+        		model == null || model.trim().isEmpty() ||
+        		state == null || state.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid parameter.");
+        } else {
+        	// Retrieve BlogUsers, and store as a message.
+        	try {
+            	blogUsers = blogUsersDao.getBlogUsersFromFirstName(firstName);
+            } catch (SQLException e) {
+    			e.printStackTrace();
+    			throw new IOException(e);
+            }
+        	messages.put("success", "Displaying results for " + firstName);
+        	// Save the previous search term, so it can be used as the default
+        	// in the input box when rendering FindUsers.jsp.
+        	messages.put("previousFirstName", firstName);
+        }
+        req.setAttribute("blogUsers", blogUsers);
+
         req.getRequestDispatcher("/search/search.jsp").forward(req, resp);
 	}
 }
