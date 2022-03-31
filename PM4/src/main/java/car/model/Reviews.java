@@ -11,18 +11,18 @@ public class Reviews{
 	protected Date date;
 	protected String reviewContent;
 	protected double rating;
-	protected int buyerId;
-	protected int sellerId;
+	protected Buyer buyer;
+	protected Sellers seller;
 	
 	//this constructor is used for reading records
-	public Reviews(int reviewId, Date date, String reviewContent, double rating, int buyerId, int sellerId) {
+	public Reviews(int reviewId, Date date, String reviewContent, double rating, Buyer buyer, Sellers seller) {
 		super();
 		this.reviewId = reviewId;
 		this.date = date;
 		this.reviewContent = reviewContent;
 		this.rating = rating;
-		this.buyerId = buyerId;
-		this.sellerId = sellerId;
+		this.buyer = buyer;
+		this.seller = seller;
 	}
 	
 	
@@ -35,13 +35,13 @@ public class Reviews{
 
 
 	//this constructor is used for creating records
-	public Reviews(Date date, String reviewContent, double rating, int buyerId, int sellerId) {
+	public Reviews(Date date, String reviewContent, double rating, Buyer buyer, Sellers seller) {
 		super();
 		this.date = date;
 		this.reviewContent = reviewContent;
 		this.rating = rating;
-		this.buyerId = buyerId;
-		this.sellerId = sellerId;
+		this.buyer = buyer;
+		this.seller = seller;
 	}
 
 
@@ -85,25 +85,25 @@ public class Reviews{
 	}
 
 
-	public int getBuyerId() {
-		return buyerId;
+	public Buyer getBuyer() {
+		return buyer;
 	}
 
 
-	public void setBuyerId(int buyerId) {
-		this.buyerId = buyerId;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 
 
-	public int getSellerId() {
-		return sellerId;
+	public Sellers getSeller() {
+		return seller;
 	}
 
 
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSeller(Sellers seller) {
+		this.seller = seller;
 	}
-	
+
 	
 	
 }

@@ -6,14 +6,14 @@ package car.model;
  */
 public class Saves{
 	protected int saveId;
-	protected String vin;
-	protected int userId;
+	protected Cars car;
+	protected Buyer buyer;
 	//this constructor is used for reading records
-	public Saves(int saveId, String vin, int userId) {
+	public Saves(int saveId, Cars car, Buyer buyer) {
 		super();
 		this.saveId = saveId;
-		this.vin = vin;
-		this.userId = userId;
+		this.car = car;
+		this.buyer = buyer;
 	}
 	//this constructor is used for reference
 	public Saves(int saveId) {
@@ -22,10 +22,10 @@ public class Saves{
 	}
 
 	//this constructor is used for creating records
-	public Saves(String vin, int userId) {
+	public Saves(Cars car, Buyer buyer) {
 		super();
-		this.vin = vin;
-		this.userId = userId;
+		this.car = car;
+		this.buyer = buyer;
 	}
 	public int getSaveId() {
 		return saveId;
@@ -33,17 +33,17 @@ public class Saves{
 	public void setSaveId(int saveId) {
 		this.saveId = saveId;
 	}
-	public String getVin() {
-		return vin;
+	public Cars getCar() {
+		return car;
 	}
-	public void setVin(String vin) {
-		this.vin = vin;
+	public void setCar(Cars car) {
+		this.car = car;
 	}
-	public int getUserId() {
-		return userId;
+	public Buyer getBuyer() {
+		return buyer;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 	
 	
