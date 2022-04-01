@@ -35,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  * 4. Point your browser to http://localhost:8080/Cargo/update?vin=xxxxx.
  */
 @WebServlet("/update")
-public class updateTest extends HttpServlet {
+public class UpdateTest extends HttpServlet {
 	
 	protected CarDao carDao;
 	
