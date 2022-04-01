@@ -49,8 +49,8 @@ CREATE TABLE Buyers (
  UserId 		INT,
  DOB 			DATE 	NOT NULL,
  ZIP 			INT 	NOT NULL,
- CONSTRAINT pk_Admins_UserId PRIMARY KEY (UserId),
- CONSTRAINT fk_Admins_UserId FOREIGN KEY (UserId)
+ CONSTRAINT pk_Buyers_UserId PRIMARY KEY (UserId),
+ CONSTRAINT fk_Buyers_UserId FOREIGN KEY (UserId)
   REFERENCES Users(UserId)
   ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -86,7 +86,7 @@ create table Searches(
     Interior 		varchar(255),
     UserId 			int,
     constraint pk_Search_SearchId primary key (SearchId),
-    constraint fk_Search_UserId foreign key (UserId) references Buyers(BuyerId)
+    constraint fk_Search_UserId foreign key (UserId) references Buyers(UserId)
 );
 
 create table Cars(
@@ -117,8 +117,8 @@ create table Reviews(
     BuyerId 		int,
     SellerId 		int,
     constraint pk_Review_ReviewId PRIMARY KEY (ReviewId),
-    constraint fk_Review_BuyerId foreign key (BuyerId) references Buyers(BuyerId),
-    constraint fk_Review_SellerId foreign key (SellerId) references Sellers(SellerId)
+    constraint fk_Review_BuyerId foreign key (BuyerId) references Buyers(UserId),
+    constraint fk_Review_SellerId foreign key (SellerId) references Sellers(UserId)
 );
 
 CREATE TABLE Messages (
@@ -141,6 +141,6 @@ CREATE TABLE Saves(
 	CONSTRAINT pk_Saves_SaveId PRIMARY KEY(SaveId),
 	CONSTRAINT fk_Saves_Vin FOREIGN KEY(Vin) REFERENCES Cars(Vin)
 	ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_Saves_UserId FOREIGN KEY(UserId) REFERENCES Buyers(BuyerId)
+	CONSTRAINT fk_Saves_UserId FOREIGN KEY(UserId) REFERENCES Buyers(UserId)
 	ON UPDATE CASCADE ON DELETE CASCADE
 );
