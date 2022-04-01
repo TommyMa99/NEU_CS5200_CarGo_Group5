@@ -41,6 +41,7 @@
 
 	<main> <section class="py-5 text-center container">
 	<div class="container-fluid">
+		<c:if test="${messages['success'] != null}"><div class="alert alert-success" role="alert"><c:out value = "${messages['success']}"/></div></c:if>
 		<form class="d-flex" action="/Cargo/search" method="GET">
 			<input class="form-control form-control-lg me-2" type="search"
 				placeholder="Year" aria-label="year" name="year"
@@ -56,6 +57,7 @@
 				value=${messages['previousState']}>
 			<button class="btn btn-outline-primary" type="submit">Search</button>
 		</form>
+
 	</div>
 	</section>
 
