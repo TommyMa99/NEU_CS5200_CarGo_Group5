@@ -56,13 +56,13 @@ CREATE TABLE Buyers (
 );
 
 CREATE TABLE Sellers (
- SellerId 		INT,
+ UserId 		INT,
  CompanyId 		INT,
  ZIP 			INT 			NOT NULL,
  Address 		VARCHAR(255) 	NOT NULL,
  Introduction 	VARCHAR(1023),
- CONSTRAINT pk_Sellers_SellerId PRIMARY KEY (SellerId),
- CONSTRAINT fk_Sellers_SellerId FOREIGN KEY (SellerId)
+ CONSTRAINT pk_Sellers_UserId PRIMARY KEY (UserId),
+ CONSTRAINT fk_Sellers_UserId FOREIGN KEY (UserId)
   REFERENCES Users(UserId)
   ON UPDATE CASCADE ON DELETE CASCADE,
  CONSTRAINT fk_Sellers_CompanyId FOREIGN KEY (CompanyId)
