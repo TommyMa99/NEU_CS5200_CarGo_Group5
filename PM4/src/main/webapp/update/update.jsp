@@ -43,7 +43,7 @@
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<form>
+			<form action="/Cargo/update" method="POST">
 				<div class="mb-3">
 					<label for="InputVin" class="form-label">Vin</label> 
 					<input type="text" class="form-control" name="vin" value="${car.getVin()}">
