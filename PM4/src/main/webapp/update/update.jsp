@@ -46,7 +46,7 @@
 			<form action="/Cargo/update" method="POST">
 				<div class="mb-3">
 					<label for="InputVin" class="form-label">Vin</label> 
-					<input type="text" class="form-control" name="vin" value="${car.getVin()}">
+					<input type="text" class="form-control" name="vin" value="${car.getVin()}" readonly>
 				</div>
 				<div class="mb-3">
 					<label for="InputYear" class="form-label">Year</label> 
