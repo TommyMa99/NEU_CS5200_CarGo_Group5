@@ -44,13 +44,17 @@
 	<div class="container-fluid">
 		<form class="d-flex" action="/Cargo/search" method="GET">
 			<input class="form-control form-control-lg me-2" type="search"
-				placeholder="Year" aria-label="year" name="year"> <input
+				placeholder="Year" aria-label="year" name="year"
+				value=${messages['previousYear']}> <input
 				class="form-control form-control-lg me-2" type="search"
-				placeholder="Make" aria-label="make" name="make"> <input
+				placeholder="Make" aria-label="make" name="make"
+				value=${messages['previousMake']}> <input
 				class="form-control form-control-lg me-2" type="search"
-				placeholder="Model" aria-label="model" name="model"> <input
+				placeholder="Model" aria-label="model" name="model"
+				value=${messages['previousModel']}> <input
 				class="form-control form-control-lg me-2" type="search"
-				placeholder="State" aria-label="state" name="state">
+				placeholder="State" aria-label="state" name="state"
+				value=${messages['previousState']}>
 			<button class="btn btn-outline-primary" type="submit">Search</button>
 		</form>
 	</div>
@@ -69,16 +73,22 @@
 									<c:out value="${car.getModel()}" />
 									</h5>
 									<h5 class="card-title mb-3 text-muted">
-										$&nbsp<c:out value="${car.getMmr()}" />
+										$
+										<c:out value="${car.getMmr()}" />
 										</h6>
 										<h5 class="card-subtitle mb-3 text-muted">
-											<c:out value="${car.getOdometer()}" />&nbsp Miles
+											<c:out value="${car.getOdometer()}" />
+											&nbsp Miles
 											</h6>
 
 											<p class="card-text">
-												Color:&nbsp<c:out value="${car.getColor()}" />&nbsp&nbsp&nbsp&nbsp
-												Interior:&nbsp<c:out value="${car.getInterior()}" />&nbsp&nbsp&nbsp&nbsp
-												State:&nbsp<c:out value="${car.getState().toUpperCase()}" />&nbsp
+												Color:&nbsp
+												<c:out value="${car.getColor()}" />
+												&nbsp&nbsp&nbsp&nbsp Interior:&nbsp
+												<c:out value="${car.getInterior()}" />
+												&nbsp&nbsp&nbsp&nbsp State:&nbsp
+												<c:out value="${car.getState().toUpperCase()}" />
+												&nbsp
 											</p>
 											<a href="#" class="card-link">Details</a>
 							</div>
