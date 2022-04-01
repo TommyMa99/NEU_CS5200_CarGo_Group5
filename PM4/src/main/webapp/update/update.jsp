@@ -96,6 +96,10 @@
 					<label for="InputMmr" class="form-label">Mmr</label> 
 					<input type="text" class="form-control" name="mmr" value="${car.getMmr()}">
 				</div>
+				<div class="mb-3">
+					<label for="InputSellingPrice" class="form-label">Selling Price</label> 
+					<input type="text" class="form-control" name="sellingPrice" value="${car.getSellingPrice()}">
+				</div>
 				
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
