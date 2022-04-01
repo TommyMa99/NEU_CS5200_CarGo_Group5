@@ -46,23 +46,23 @@ CREATE TABLE Admins (
 );
 
 CREATE TABLE Buyers (
- BuyerId 		INT,
+ UserId 		INT,
  DOB 			DATE 	NOT NULL,
  ZIP 			INT 	NOT NULL,
- CONSTRAINT pk_Admins_BuyerId PRIMARY KEY (BuyerId),
- CONSTRAINT fk_Admins_BuyerId FOREIGN KEY (BuyerId)
+ CONSTRAINT pk_Admins_UserId PRIMARY KEY (UserId),
+ CONSTRAINT fk_Admins_UserId FOREIGN KEY (UserId)
   REFERENCES Users(UserId)
   ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Sellers (
- SellerId 		INT,
+ UserId 		INT,
  CompanyId 		INT,
  ZIP 			INT 			NOT NULL,
  Address 		VARCHAR(255) 	NOT NULL,
  Introduction 	VARCHAR(1023),
- CONSTRAINT pk_Sellers_SellerId PRIMARY KEY (SellerId),
- CONSTRAINT fk_Sellers_SellerId FOREIGN KEY (SellerId)
+ CONSTRAINT pk_Sellers_UserId PRIMARY KEY (UserId),
+ CONSTRAINT fk_Sellers_UserId FOREIGN KEY (UserId)
   REFERENCES Users(UserId)
   ON UPDATE CASCADE ON DELETE CASCADE,
  CONSTRAINT fk_Sellers_CompanyId FOREIGN KEY (CompanyId)
@@ -104,9 +104,9 @@ create table Cars(
     Interior 		varchar(255),
     Mmr 			int,
     SellingPrice	int,
-    SellerId 		int,
+    UserId 		int,
     constraint pk_Search_Vin primary key (Vin),
-    constraint fk_Search_SellerId foreign key (SellerId) references Sellers(SellerId)
+    constraint fk_Search_SellerId foreign key (UserId) references Sellers(UserId)
 );
 
 create table Reviews(
