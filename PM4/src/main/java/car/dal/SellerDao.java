@@ -9,7 +9,6 @@ import car.model.Sellers;
 import car.model.User;
 
 public class SellerDao extends UserDao{
-		protected ConnectionManager connectionManager;
 		// Single pattern: instantiation is limited to one object.
 		private static SellerDao instance = null;
 		protected SellerDao() {
