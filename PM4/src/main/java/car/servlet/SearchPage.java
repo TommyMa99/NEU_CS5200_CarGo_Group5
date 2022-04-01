@@ -16,6 +16,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+/**   
+ * The servlet for search car info
+ * 
+ * @author: Bingfan Tian  
+ * @date: 2022.04.01 
+ */
 @WebServlet("/search")
 public class SearchPage extends HttpServlet {
 	

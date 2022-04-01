@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+/**   
+ * The servlet for create a new car
+ * 
+ * @author: Bingfan Tian  
+ * @date: 2022.04.01 
+ */
 @WebServlet("/new")
 public class NewCar extends HttpServlet {
 	protected CarDao carDao;

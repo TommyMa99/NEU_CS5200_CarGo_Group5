@@ -1,5 +1,7 @@
 package car.servlet;
 
+
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -14,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import car.dal.CarDao;
 import car.model.Cars;
 
+/**   
+ * The servlet for delete a car info
+ * 
+ * @author: Bingfan Tian  
+ * @date: 2022.04.01 
+ */
 @WebServlet("/delete")
 public class DeleteCar extends HttpServlet {
 
