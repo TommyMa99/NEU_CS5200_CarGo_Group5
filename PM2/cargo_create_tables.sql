@@ -46,11 +46,11 @@ CREATE TABLE Admins (
 );
 
 CREATE TABLE Buyers (
- BuyerId 		INT,
+ UserId 		INT,
  DOB 			DATE 	NOT NULL,
  ZIP 			INT 	NOT NULL,
- CONSTRAINT pk_Admins_BuyerId PRIMARY KEY (BuyerId),
- CONSTRAINT fk_Admins_BuyerId FOREIGN KEY (BuyerId)
+ CONSTRAINT pk_Admins_UserId PRIMARY KEY (UserId),
+ CONSTRAINT fk_Admins_UserId FOREIGN KEY (UserId)
   REFERENCES Users(UserId)
   ON UPDATE CASCADE ON DELETE CASCADE
 );
