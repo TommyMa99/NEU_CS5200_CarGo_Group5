@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  *    Run As > JavaApplication.
  *    Notice that this is similar to Runner.java in our JDBC example.
  * 3. Run the Tomcat server at localhost.
- * 4. Point your browser to http://localhost:8080/BlogApplication/findusers.
+ * 4. Point your browser to http://localhost:8080/Cargo/update?vin=xxxxx.
  */
 @WebServlet("/update")
 public class updateTest extends HttpServlet {
