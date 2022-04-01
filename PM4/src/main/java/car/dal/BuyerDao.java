@@ -15,8 +15,6 @@ import car.model.*;
  *
  */
 public class BuyerDao extends UserDao{
-	
-	
 	// Single pattern: instantiation is limited to one object.
 	private static BuyerDao instance = null;
 	protected BuyerDao() {
