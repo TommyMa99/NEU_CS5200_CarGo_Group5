@@ -104,9 +104,9 @@ create table Cars(
     Interior 		varchar(255),
     Mmr 			int,
     SellingPrice	int,
-    SellerId 		int,
+    UserId 		int,
     constraint pk_Search_Vin primary key (Vin),
-    constraint fk_Search_SellerId foreign key (SellerId) references Sellers(SellerId)
+    constraint fk_Search_SellerId foreign key (UserId) references Sellers(UserId)
 );
 
 create table Reviews(
