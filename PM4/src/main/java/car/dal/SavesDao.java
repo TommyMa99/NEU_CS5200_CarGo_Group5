@@ -5,17 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import car.model.Buyer;
 import car.model.Cars;
-import car.model.Reviews;
 import car.model.Saves;
 import car.model.Sellers;
-
+/**
+ * Saves Dao
+ * @author yansen
+ *
+ */
 public class SavesDao{
 	protected ConnectionManager connectionManager;
 
@@ -45,7 +46,7 @@ public class SavesDao{
 				Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setString(1, save.getCar().getVin());
 			
-			insertStmt.setInt(2, save.getUser().getUserId());
+			insertStmt.setInt(2, save.getBuyer().getUserId());
 			
 			insertStmt.executeUpdate();
 			
@@ -91,7 +92,7 @@ public class SavesDao{
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		CarDao carDao = CarDao.getInstance();
-		UserDao userDao = UserDao.getInstance();
+		BuyerDao buyerDao = BuyerDao.getInstance();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectSave);
@@ -103,7 +104,7 @@ public class SavesDao{
 				String vin = results.getString("Vin");
 				Cars car = carDao.getCarByVin(vin);
 				int userId = results.getInt("UserId");
-				Buyer buyer = userDao.getUserByUserId(userId);
+				Buyer buyer = (Buyer) buyerDao.getUserByUserId(userId);
 				Saves save = new Saves(resultSaveId,car,buyer);
 				return save;
 			}
@@ -132,13 +133,13 @@ public class SavesDao{
 		List<Cars> cars = new ArrayList<>();
 		String selectCarsFromSaves =
 			"SELECT Saves.Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,"
-			+ "CarConditon,Color,Interior,Mmr,SellerId" +
+			+ "CarConditon,Color,Interior,Mmr,SellingPrice,SellerId" +
 			"FROM Saves INNER JOIN ON Saves.Vin = Cars.Vin" +
 			"WHERE UserId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
-		CarDao carDao = CarDao.getInstance();
+		
 		UserDao userDao = UserDao.getInstance();
 		try {
 			connection = connectionManager.getConnection();
@@ -159,10 +160,11 @@ public class SavesDao{
 				String color = results.getString("Color");
 				String interior = results.getString("Interior");
 				int mmr = results.getInt("Mmr");
+				int sellingPrice = results.getInt("SellingPrice");
 				int sellerId = results.getInt("SellerId");
-				Sellers seller = userDao.getUserByUserId(sellerId);
+				Sellers seller = (Sellers) userDao.getUserByUserId(sellerId);
 				Cars car = new Cars(vin,year,make,model,trim,body,transmission,state,odometer,
-						carCondition,color,interior,mmr,seller);
+						carCondition,color,interior,mmr,sellingPrice,seller);
 				cars.add(car);
 			}
 		} catch (SQLException e) {

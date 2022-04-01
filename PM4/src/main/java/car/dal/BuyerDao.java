@@ -104,7 +104,7 @@ public class BuyerDao extends UserDao{
 				int zip = results.getInt("ZIP");
 				
 			
-				User buyer = new Buyer(resultUserId, dob, zip);
+				Buyer buyer = new Buyer(resultUserId, dob, zip);
 				return buyer;
 			}
 		} catch (SQLException e) {
