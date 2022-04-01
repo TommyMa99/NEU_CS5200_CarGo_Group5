@@ -65,26 +65,19 @@ public class SearchTest extends HttpServlet {
             messages.put("success", "Please enter a valid parameter.");
         } else {
         	// Retrieve BlogUsers, and store as a message.
-//        	try {
-//       		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
-//        		// hard code some test case since DAO is not ready
-//        		Cars car1 = new Cars("19uua8f20ba003355", 2011, "Acura", "TL", "Base", "Sedan", "automatic", "nj", 57880, 3.7, "silver", "gray", 16000, 16000, null);
-//        		Cars car2 = new Cars("19uua8f20da015332", 2013, "Acura", "TL", "Base", "Sedan", "automatic", "nv", 25681, 3.8, "white", "black", 21500, 22250, null);
-//        		Cars car3 = new Cars("19xfb2f51ee233919", 2014, "Honda", "Civic", "LX", "Sedan", "automatic", "ca", 10424, 4.3, "white", "gray", 14150, 15900, null);
-//        		cars.add(car1);
-//        		cars.add(car2);
-//        		cars.add(car3);
-//        	} catch (SQLException e) {
-//    			e.printStackTrace();
-//    			throw new IOException(e);
-//            }
+        	try {
+        		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
+        	} catch (SQLException e) {
+    			e.printStackTrace();
+    			throw new IOException(e);
+            }
         	// hard code some test case since DAO is not ready
-        	Cars car1 = new Cars("19uua8f20ba003355", 2011, "Acura", "TL", "Base", "Sedan", "automatic", "nj", 57880, 3.7, "silver", "gray", 16000, 16000, null);
-    		Cars car2 = new Cars("19uua8f20da015332", 2013, "Acura", "TL", "Base", "Sedan", "automatic", "nv", 25681, 3.8, "white", "black", 21500, 22250, null);
-    		Cars car3 = new Cars("19xfb2f51ee233919", 2014, "Honda", "Civic", "LX", "Sedan", "automatic", "ca", 10424, 4.3, "white", "gray", 14150, 15900, null);
-    		cars.add(car1);
-    		cars.add(car2);
-    		cars.add(car3);
+//        	Cars car1 = new Cars("19uua8f20ba003355", 2011, "Acura", "TL", "Base", "Sedan", "automatic", "nj", 57880, 3.7, "silver", "gray", 16000, 16000, null);
+//    		Cars car2 = new Cars("19uua8f20da015332", 2013, "Acura", "TL", "Base", "Sedan", "automatic", "nv", 25681, 3.8, "white", "black", 21500, 22250, null);
+//    		Cars car3 = new Cars("19xfb2f51ee233919", 2014, "Honda", "Civic", "LX", "Sedan", "automatic", "ca", 10424, 4.3, "white", "gray", 14150, 15900, null);
+//    		cars.add(car1);
+//    		cars.add(car2);
+//    		cars.add(car3);
         	messages.put("success", "Displaying results for " + year + " " + make + " " + model + " in " + state);
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindUsers.jsp.
@@ -120,22 +113,22 @@ public class SearchTest extends HttpServlet {
         		state == null || state.trim().isEmpty()) {
             messages.put("success", "Please enter a valid parameter.");
         } else {
-//        	// Retrieve BlogUsers, and store as a message.
-//        	try {
-//        		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
-//            } catch (SQLException e) {
-//    			e.printStackTrace();
-//    			throw new IOException(e);
-//            }
+        	// Retrieve BlogUsers, and store as a message.
+        	try {
+        		cars = carDao.getCarByParameters(Integer.valueOf(year), make, model, state);
+            } catch (SQLException e) {
+    			e.printStackTrace();
+    			throw new IOException(e);
+            }
         	messages.put("success", "Displaying results for " + year + " " + make + " " + model + " in " + state);
         	
         	// hard code some test case since DAO is not ready
-        	Cars car1 = new Cars("19uua8f20ba003355", 2011, "Acura", "TL", "Base", "Sedan", "automatic", "nj", 57880, 3.7, "silver", "gray", 16000, 16000, null);
-    		Cars car2 = new Cars("19uua8f20da015332", 2013, "Acura", "TL", "Base", "Sedan", "automatic", "nv", 25681, 3.8, "white", "black", 21500, 22250, null);
-    		Cars car3 = new Cars("19xfb2f51ee233919", 2014, "Honda", "Civic", "LX", "Sedan", "automatic", "ca", 10424, 4.3, "white", "gray", 14150, 15900, null);
-    		cars.add(car1);
-    		cars.add(car2);
-    		cars.add(car3);
+//        	Cars car1 = new Cars("19uua8f20ba003355", 2011, "Acura", "TL", "Base", "Sedan", "automatic", "nj", 57880, 3.7, "silver", "gray", 16000, 16000, null);
+//    		Cars car2 = new Cars("19uua8f20da015332", 2013, "Acura", "TL", "Base", "Sedan", "automatic", "nv", 25681, 3.8, "white", "black", 21500, 22250, null);
+//    		Cars car3 = new Cars("19xfb2f51ee233919", 2014, "Honda", "Civic", "LX", "Sedan", "automatic", "ca", 10424, 4.3, "white", "gray", 14150, 15900, null);
+//    		cars.add(car1);
+//    		cars.add(car2);
+//    		cars.add(car3);
         }
     	req.setAttribute("cars", cars);
         
