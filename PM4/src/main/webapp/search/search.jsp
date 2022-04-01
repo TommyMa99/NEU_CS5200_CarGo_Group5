@@ -29,12 +29,11 @@
 		</a>
 
 		<ul class="nav nav-pills">
-			<li class="nav-item"><a href="#" class="nav-link active"
-				aria-current="page">Shop</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">About</a></li>
+			<li class="nav-item">
+				<form action="/Cargo/new" method="GET">
+					<button class="btn btn-outline-primary" type="submit">New</button>
+				</form>
+			</li>
 		</ul>
 		</header>
 	</div>
@@ -90,7 +89,18 @@
 												<c:out value="${car.getState().toUpperCase()}" />
 												&nbsp
 											</p>
-											<a href="#" class="card-link">Details</a>
+											<form action="/Cargo/update" method="GET"
+												style="display: inline">
+												<input type="hidden" aria-label="vin" name="vin"
+													value="${car.getVin()}">
+												<button class="btn btn-outline-success" type="submit">Update</button>
+											</form>
+											<form action="/Cargo/delete" method="GET"
+												style="display: inline">
+												<input type="hidden" aria-label="vin" name="vin"
+													value="${car.getVin()}">
+												<button class="btn btn-outline-danger" type="submit">Delete</button>
+											</form>
 							</div>
 						</div>
 					</div>
