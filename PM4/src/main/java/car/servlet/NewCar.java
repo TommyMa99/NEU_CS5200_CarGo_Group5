@@ -58,9 +58,7 @@ public class NewCar extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         
-//        String userName = req.getParameter("username");
         String resultVin = req.getParameter("vin");
-		
         if (resultVin == null || resultVin.trim().isEmpty()) {
             messages.put("success", "Invalid Vin number");
         } else {
@@ -97,7 +95,7 @@ public class NewCar extends HttpServlet {
 				throw new IOException(e);
 			}
         }
-        req.getRequestDispatcher("/new/new.jsp").forward(req, resp);
+        req.getRequestDispatcher("/search/search.jsp").forward(req, resp);
     }
 	
 }

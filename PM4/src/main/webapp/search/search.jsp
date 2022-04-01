@@ -73,7 +73,7 @@
 									</h5>
 									<h5 class="card-title mb-3 text-muted">
 										$
-										<c:out value="${car.getMmr()}" />
+										<c:out value="${car.getSellingPrice()}" />
 										</h6>
 										<h5 class="card-subtitle mb-3 text-muted">
 											<c:out value="${car.getOdometer()}" />

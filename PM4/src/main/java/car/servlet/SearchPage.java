@@ -107,6 +107,6 @@ public class SearchPage extends HttpServlet {
         }
     	req.setAttribute("cars", cars);
         
-        req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
+        req.getRequestDispatcher("/search/search.jsp").forward(req, resp);
     }
 }
