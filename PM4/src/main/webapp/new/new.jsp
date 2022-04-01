@@ -94,7 +94,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="InputMmr" class="form-label">Mmr</label> 
-					<input type="text" class="form-control" name="vin">
+					<input type="text" class="form-control" name="mmr">
 				</div>
 				
 				<button type="submit" class="btn btn-primary">Submit</button>
