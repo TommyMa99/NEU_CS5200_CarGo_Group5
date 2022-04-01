@@ -149,18 +149,18 @@ INSERT INTO Users(FirstName, LastName, Email, Password)
 INSERT INTO Admins(UserId)
 	VALUES(1);
     
-INSERT INTO Buyers(BuyerId, DOB, ZIP)
+INSERT INTO Buyers(UserId, DOB, ZIP)
 	VALUES(2, '1996.10.19', 98103);
-INSERT INTO Buyers(BuyerId, DOB, ZIP)
+INSERT INTO Buyers(UserId, DOB, ZIP)
 	VALUES(3, '1999.08.21', 98115);
-INSERT INTO Buyers(BuyerId, DOB, ZIP)
+INSERT INTO Buyers(UserId, DOB, ZIP)
 	VALUES(4, '1997.02.02', 98104);
     
-INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+INSERT INTO Sellers(UserId, CompanyId, ZIP, Address, Introduction)
 	VALUES(5, 1, 98103, 'Address', 'Introduction');
-INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+INSERT INTO Sellers(UserId, CompanyId, ZIP, Address, Introduction)
 	VALUES(6, 1, 98103, 'Address', 'Introduction');
-INSERT INTO Sellers(SellerId, CompanyId, ZIP, Address, Introduction)
+INSERT INTO Sellers(UserId, CompanyId, ZIP, Address, Introduction)
 	VALUES(7, 2, 98115, 'Address', 'Introduction');
     
 INSERT INTO Saves(UserId, Vin)
