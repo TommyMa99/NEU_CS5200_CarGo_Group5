@@ -48,14 +48,14 @@ public class SignIn extends HttpServlet {
         } else {
 			try {
 				user = userDao.getUserByEmail(email);
-				if (user.getPassword().equals(password)) {
+				if (!(user == null) && user.getPassword().equals(password)) {
 		        	messages.put("success", "Successed! UserName: " + user.getFirstName());
 				} else {
 		        	messages.put("success", "Password is wrong.");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-    			throw new IOException(e);
+//    			throw new IOException(e);
 			}
         	// Save the previous search term, so it can be used as the default
         	// in the input box when rendering FindUsers.jsp.
