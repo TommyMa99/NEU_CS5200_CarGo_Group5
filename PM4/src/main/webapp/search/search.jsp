@@ -28,7 +28,26 @@
 			<span class="fs-4">CarGo</span>
 		</a>
 
+<!-- 
 		<ul class="nav nav-pills">
+			<li class="nav-item">
+				<form action="/Cargo/signin" method="GET">
+					<button class="btn btn-outline-primary" type="submit">Sign In</button>
+				</form>
+			</li>
+		</ul> -->
+		
+		<ul class="nav nav-pills">
+			<li class="nav-item">
+				<form action="/Cargo/signin" method="GET">
+					<button class="btn btn-outline-primary" type="submit">Sign In</button>
+				</form>
+			</li>
+			<li class="nav-item">
+				<form action="/Cargo/signup/signup.jsp" method="GET">
+					<button class="btn btn-outline-primary" type="submit">Sign Up</button>
+				</form>
+			</li>
 			<li class="nav-item">
 				<form action="/Cargo/new" method="GET">
 					<button class="btn btn-outline-primary" type="submit">New</button>
