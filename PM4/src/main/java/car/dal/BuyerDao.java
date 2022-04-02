@@ -33,7 +33,7 @@ public class BuyerDao extends UserDao{
 	 */
 	public Buyer create(Buyer buyer) throws SQLException {
         // Insert into the superclass table first.
-		create(new User(buyer.getFirstName(), buyer.getLastName(),
+		User user = create(new User(buyer.getFirstName(), buyer.getLastName(),
         buyer.getEmail(), buyer.getPassword()));
 
 		String insertBuyer = "INSERT INTO Buyers(UserId,DOB,Zip) " +
@@ -50,7 +50,7 @@ public class BuyerDao extends UserDao{
 			// http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
 			// For nullable fields, you can check the property first and then call setNull()
 			// as applicable.
-			insertStmt.setInt(1, buyer.getUserId());
+			insertStmt.setInt(1, user.getUserId());
             insertStmt.setTimestamp(2, new Timestamp(buyer.getDob().getTime()));
 			
 			insertStmt.setInt(3, buyer.getZip());
