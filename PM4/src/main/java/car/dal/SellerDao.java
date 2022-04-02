@@ -30,7 +30,7 @@ public class SellerDao extends UserDao{
 			create(new User(seller.getFirstName(), seller.getLastName(),
 	        seller.getEmail(), seller.getPassword()));
 
-			String insertSeller = "INSERT INTO Sellers(CompanyId,Zip,Address,Introduction) " +
+			String insertSeller = "INSERT INTO Sellers(UserId,CompanyId,Zip,Address,Introduction) " +
 	        "VALUES(?,?,?,?);";
 			Connection connection = null;
 			PreparedStatement insertStmt = null;
@@ -44,11 +44,11 @@ public class SellerDao extends UserDao{
 				// http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
 				// For nullable fields, you can check the property first and then call setNull()
 				// as applicable.
-				insertStmt.setInt(1, seller.getCompany().getCompanyId());
-	            insertStmt.setInt(2, seller.getZip());
-				
-				insertStmt.setString(3, seller.getAddress());
-				insertStmt.setString(4, seller.getIntroduction());
+				insertStmt.setInt(1, seller.getUserId());		
+				insertStmt.setInt(2, seller.getCompany().getCompanyId());
+	            insertStmt.setInt(3, seller.getZip());
+				insertStmt.setString(4, seller.getAddress());
+				insertStmt.setString(5, seller.getIntroduction());
 
 				// Note that we call executeUpdate(). This is used for a INSERT/UPDATE/DELETE
 				// statements, and it returns an int for the row counts affected (or 0 if the

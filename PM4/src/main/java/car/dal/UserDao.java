@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class UserDao{
         ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertUser);
+			insertStmt = connection.prepareStatement(insertUser,Statement.RETURN_GENERATED_KEYS);
 			// PreparedStatement allows us to substitute specific types into the query template.
 			// For an overview, see:
 			// http://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html.
