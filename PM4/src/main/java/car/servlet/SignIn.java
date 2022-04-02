@@ -29,17 +29,30 @@ public class SignIn extends HttpServlet {
 		userDao = UserDao.getInstance();
 	}
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
+    	System.out.println("get");
+        //Just render the JSP.   
+        req.getRequestDispatcher("/signin/signin.jsp").forward(req, res);
+	}
+
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		// Map for storing messages.
+        Map<String, String> messages = new HashMap<String, String>();
+        req.setAttribute("messages", messages);
+        
         User user = null;
         
         // Retrieve and validate name.
         // firstname is retrieved from the URL query string.
         String email = req.getParameter("email");
+        req.setAttribute("email", email);
     	String password = req.getParameter("password");
+    	System.out.println("post");
     	System.out.println(email);
     	System.out.println(password);
         if (email == null || email.trim().isEmpty() ||

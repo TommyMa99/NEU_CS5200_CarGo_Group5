@@ -19,16 +19,16 @@
 </head>
 <body class="text-center">
 
-	 <main class="form-signin" action="/Cargo/signin" method="post">
+	 <main class="form-signin">
 	 <div class="container-fluid">
-		<form>
+		<form action="/Cargo/signin" method="POST">
 		  <a href="/Cargo/search">
 		  	<img class="mb-4" src="assets/logo.svg" alt="" width="72" height="57" href="/Cargo/search">
 		  </a>
 		  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 		
 		  <div class="form-floating">
-		    <input type="email" class="form-control" name="email" placeholder="name@example.com">
+		    <input type="email" class="form-control" name="email" placeholder="name@example.com" value="${email}">
 		    <label for="floatingInput">Email address</label>
 		  </div>
 		  <div class="form-floating">
