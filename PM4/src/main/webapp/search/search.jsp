@@ -26,9 +26,7 @@
 			class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 			<img class="mb-4" src="assets/logo.svg" alt="" width="72" height="57">
 			<span class="fs-4">CarGo</span>
-		</a>
-
-<!-- 
+		</a> <!-- 
 		<ul class="nav nav-pills">
 			<li class="nav-item">
 				<form action="/Cargo/signin" method="GET">
@@ -36,16 +34,18 @@
 				</form>
 			</li>
 		</ul> -->
-		
+
 		<ul class="nav nav-pills">
 			<li class="nav-item">
 				<form action="/Cargo/signin" method="GET">
-					<button class="btn btn-outline-primary" type="submit">Sign In</button>
+					<button class="btn btn-outline-primary" type="submit">Sign
+						In</button>
 				</form>
 			</li>
 			<li class="nav-item">
 				<form action="/Cargo/signup/signup.jsp" method="GET">
-					<button class="btn btn-outline-primary" type="submit">Sign Up</button>
+					<button class="btn btn-outline-primary" type="submit">Sign
+						Up</button>
 				</form>
 			</li>
 			<li class="nav-item">
@@ -60,7 +60,11 @@
 
 	<main> <section class="py-5 text-center container">
 	<div class="container-fluid">
-		<c:if test="${messages['success'] != null}"><div class="alert alert-success" role="alert"><c:out value = "${messages['success']}"/></div></c:if>
+		<c:if test="${messages['success'] != null}">
+			<div class="alert alert-success" role="alert">
+				<c:out value="${messages['success']}" />
+			</div>
+		</c:if>
 		<form class="d-flex" action="/Cargo/search" method="GET">
 			<input class="form-control form-control-lg me-2" type="search"
 				placeholder="Year" aria-label="year" name="year"
@@ -88,40 +92,54 @@
 					<div class="col">
 						<div class="card shadow-sm">
 							<div class="card-body">
-								<h4 class="card-title">
+								<h4 class="card-title" style="display: inline;">
 									<c:out value="${car.getMake()}" />
 									<c:out value="${car.getModel()}" />
-									</h5>
-									<h5 class="card-title mb-3 text-muted">
-										$
-										<c:out value="${car.getSellingPrice()}" />
-										</h6>
-										<h5 class="card-subtitle mb-3 text-muted">
-											<c:out value="${car.getOdometer()}" />
-											&nbsp Miles
-											</h6>
+								</h4>
+								<form style="display: inline" action="/Cargo/save" method="post">
+									<input type="hidden" aria-label="vin" name="vin"
+										value="${car.getVin()}" /> 
+									<input type="hidden"
+										aria-label="buyerId" name="buyerId" value="3" />
+									<button type="submit" class="btn"
+										style="display: inline; position: absolute; right: 20px;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="#dc3545" class="bi bi-heart" viewBox="0 0 16 16">
+										<path
+											d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+										</svg>
+									</button>
+								</form>
+								<h5 class="card-title mb-3 text-muted">
+									$
+									<c:out value="${car.getSellingPrice()}" />
+								</h5>
+								<h5 class="card-subtitle mb-3 text-muted">
+									<c:out value="${car.getOdometer()}" />
+									&nbsp Miles
+								</h5>
 
-											<p class="card-text">
-												Color:&nbsp
-												<c:out value="${car.getColor()}" />
-												&nbsp&nbsp&nbsp&nbsp Interior:&nbsp
-												<c:out value="${car.getInterior()}" />
-												&nbsp&nbsp&nbsp&nbsp State:&nbsp
-												<c:out value="${car.getState().toUpperCase()}" />
-												&nbsp
-											</p>
-											<form action="/Cargo/update" method="GET"
-												style="display: inline">
-												<input type="hidden" aria-label="vin" name="vin"
-													value="${car.getVin()}">
-												<button class="btn btn-outline-success" type="submit">Update</button>
-											</form>
-											<form action="/Cargo/delete" method="GET"
-												style="display: inline">
-												<input type="hidden" aria-label="vin" name="vin"
-													value="${car.getVin()}">
-												<button class="btn btn-outline-danger" type="submit">Delete</button>
-											</form>
+								<p class="card-text">
+									Color:&nbsp
+									<c:out value="${car.getColor()}" />
+									&nbsp&nbsp&nbsp&nbsp Interior:&nbsp
+									<c:out value="${car.getInterior()}" />
+									&nbsp&nbsp&nbsp&nbsp State:&nbsp
+									<c:out value="${car.getState().toUpperCase()}" />
+									&nbsp
+								</p>
+								<form action="/Cargo/update" method="GET"
+									style="display: inline">
+									<input type="hidden" aria-label="vin" name="vin"
+										value="${car.getVin()}" />
+									<button class="btn btn-outline-success" type="submit">Update</button>
+								</form>
+								<form action="/Cargo/delete" method="GET"
+									style="display: inline">
+									<input type="hidden" aria-label="vin" name="vin"
+										value="${car.getVin()}" />
+									<button class="btn btn-outline-danger" type="submit">Delete</button>
+								</form>
 							</div>
 						</div>
 					</div>

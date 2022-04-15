@@ -48,8 +48,7 @@ public class SaveCar extends HttpServlet{
         req.setAttribute("messages", messages);
         
         String resultVin = req.getParameter("vin");
-        String resultUserId = req.getParameter("userId");
-        
+        String resultUserId = req.getParameter("buyerId");
         if (resultVin == null || resultVin.trim().isEmpty()) {
             messages.put("success", "Invalid Vin number");
         }else if(resultUserId == null || resultUserId.trim().isEmpty()){
