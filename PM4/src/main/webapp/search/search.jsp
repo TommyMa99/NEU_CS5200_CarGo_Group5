@@ -93,8 +93,10 @@
 						<div class="card shadow-sm">
 							<div class="card-body">
 								<h4 class="card-title" style="display: inline;">
-									<c:out value="${car.getMake()}" />
-									<c:out value="${car.getModel()}" />
+									<a href="detail?vin=${car.getVin()}" class="link-primary">
+										<c:out value="${car.getMake()}" />
+										<c:out value="${car.getModel()}" />
+									</a>
 								</h4>
 								<form style="display: inline" action="/Cargo/save" method="post">
 									<input type="hidden" aria-label="vin" name="vin"
