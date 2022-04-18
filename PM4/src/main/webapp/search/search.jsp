@@ -26,16 +26,12 @@
 			class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 			<img class="mb-4" src="assets/logo.svg" alt="" width="72" height="57">
 			<span class="fs-4">CarGo</span>
-		</a> <!-- 
-		<ul class="nav nav-pills">
-			<li class="nav-item">
-				<form action="/Cargo/signin" method="GET">
-					<button class="btn btn-outline-primary" type="submit">Sign In</button>
-				</form>
-			</li>
-		</ul> -->
+		</a>
 
 		<ul class="nav nav-pills">
+			<li><a href="/Cargo/profile/account?userId=3"
+				class="link-primary" style="line-height: 40px; padding-right: 10px;">Kaiwen
+					Zhou</a></li>
 			<li class="nav-item">
 				<form action="/Cargo/signin" method="GET">
 					<button class="btn btn-outline-primary" type="submit">Sign
@@ -94,14 +90,13 @@
 							<div class="card-body">
 								<h4 class="card-title" style="display: inline;">
 									<a href="detail?vin=${car.getVin()}" class="link-primary">
-										<c:out value="${car.getMake()}" />
-										<c:out value="${car.getModel()}" />
+										<c:out value="${car.getMake()}" /> <c:out
+											value="${car.getModel()}" />
 									</a>
 								</h4>
 								<form style="display: inline" action="/Cargo/save" method="post">
 									<input type="hidden" aria-label="vin" name="vin"
-										value="${car.getVin()}" /> 
-									<input type="hidden"
+										value="${car.getVin()}" /> <input type="hidden"
 										aria-label="buyerId" name="buyerId" value="3" />
 									<button type="submit" class="btn"
 										style="display: inline; position: absolute; right: 20px;">
