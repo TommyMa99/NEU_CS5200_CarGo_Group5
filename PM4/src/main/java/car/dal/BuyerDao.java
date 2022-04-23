@@ -44,23 +44,11 @@ public class BuyerDao extends UserDao{
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertBuyer);
-			// PreparedStatement allows us to substitute specific types into the query template.
-			// For an overview, see:
-			// http://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html.
-			// http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
-			// For nullable fields, you can check the property first and then call setNull()
-			// as applicable.
+		
 			insertStmt.setInt(1, user.getUserId());
             insertStmt.setTimestamp(2, new Timestamp(buyer.getDob().getTime()));
-			
 			insertStmt.setInt(3, buyer.getZip());
-			
 
-			// Note that we call executeUpdate(). This is used for a INSERT/UPDATE/DELETE
-			// statements, and it returns an int for the row counts affected (or 0 if the
-			// statement returns nothing). For more information, see:
-			// http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
-			// I'll leave it as an exercise for you to write UPDATE/DELETE methods.
 			insertStmt.executeUpdate();
 			// Retrieve the auto-generated key and set it, so it can be used by the caller.
 			
