@@ -71,12 +71,7 @@ public class UpdateCar extends HttpServlet {
 	        	if(cur_car == null) {
 	        		messages.put("success", "Vin does not exist. No update to perform.");
 	        	}
-	        	int resultYear = Integer.valueOf(req.getParameter("year"));
-	    		String resultMake = req.getParameter("make");
-	    		String resultModel = req.getParameter("model");
 	    		String resultTrim = req.getParameter("trim");
-	    		String resultBody = req.getParameter("body");
-	    		String resultTransmission = req.getParameter("transmission");
 	    		String resultState = req.getParameter("state");
 	    		int resultOdometer = Integer.valueOf(req.getParameter("odometer"));
 	    		double resultCarCondition = Double.valueOf(req.getParameter("carCondition"));
