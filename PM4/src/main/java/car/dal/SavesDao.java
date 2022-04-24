@@ -134,7 +134,7 @@ public class SavesDao{
 		String selectCarsFromSaves =
 			"SELECT Saves.Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,"
 			+ "CarConditon,Color,Interior,Mmr,SellingPrice,SellerId" +
-			"FROM Saves INNER JOIN ON Saves.Vin = Cars.Vin" +
+			"FROM Saves INNER JOIN Cars ON Saves.Vin = Cars.Vin" +
 			"WHERE UserId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
