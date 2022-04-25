@@ -33,8 +33,8 @@ public class MessagesDao{
     
     public Messages create(Messages message) throws SQLException {
         String insertMessage =
-            "INSERT INTO Messages(MessageId, SentTime, Content, FromId, ToId) " +
-            "VALUES(?,?,?,?,?);";
+            "INSERT INTO Messages(SentTime, Content, FromId, ToId) " +
+            "VALUES(?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
@@ -43,12 +43,11 @@ public class MessagesDao{
             // Reviews has an auto-generated key. So we want to retrieve that key.
             insertStmt = connection.prepareStatement(insertMessage,
                 Statement.RETURN_GENERATED_KEYS);
-            insertStmt.setInt(1, message.getMessageId());
-            insertStmt.setTimestamp(2, new Timestamp(message.getSendTime().getTime()));
-            
-            insertStmt.setString(3, message.getContent());
-            insertStmt.setInt(4, message.getFromId());
-            insertStmt.setInt(5, message.getToId());
+         
+            insertStmt.setTimestamp(1, new Timestamp(message.getSendTime().getTime()));
+            insertStmt.setString(2, message.getContent());
+            insertStmt.setInt(3, message.getFromId());
+            insertStmt.setInt(4, message.getToId());
 
             insertStmt.executeUpdate();
             
@@ -132,7 +131,7 @@ public class MessagesDao{
         List<Messages> messages = new ArrayList<>();
         String selectMessage =
             "SELECT MessageId, SentTime, Content, FromId, ToId" +
-            "FROM Messages INNER JOIN Users ON Reviews.FromId = Users.UserId" +
+            "FROM Messages INNER JOIN Users ON Messages.FromId = Users.UserId" +
             "WHERE userId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -181,7 +180,7 @@ public class MessagesDao{
         List<Messages> messages = new ArrayList<>();
         String selectMessage =
             "SELECT MessageId, SentTime, Content, FromId, ToId" +
-            "FROM Messages INNER JOIN Users ON Reviews.toId = Users.UserId" +
+            "FROM Messages INNER JOIN Users ON Messages.toId = Users.UserId" +
             "WHERE userId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
