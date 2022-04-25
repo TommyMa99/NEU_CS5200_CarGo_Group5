@@ -92,7 +92,10 @@ public class SearchPage extends HttpServlet {
     			throw new IOException(e);
             }
         	messages.put("success", "Displaying results for " + year + " " + make + " " + model + " in " + state);
-   
+        	messages.put("previousYear", year);
+        	messages.put("previousMake", make);
+        	messages.put("previousModel", model);
+        	messages.put("previousState", state);
         }
     	req.setAttribute("cars", cars);
         
