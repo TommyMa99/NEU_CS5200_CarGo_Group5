@@ -14,7 +14,7 @@
 	crossorigin="anonymous">
 <link rel="shortcut icon" href="assets/logo.ico" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update</title>
+<title>Detail</title>
 </head>
 <body>
 

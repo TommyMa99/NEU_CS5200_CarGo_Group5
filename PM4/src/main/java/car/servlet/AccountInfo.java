@@ -79,6 +79,10 @@ public class AccountInfo extends HttpServlet {
 				
 				userDao.updateUser(cur_User, resultFirstName, resultLastName, resultEmail, resultPassword);
 	        	messages.put("success", "Successfully update new User info for: " + resultEmail);
+	        	messages.put("previousFirstName", resultFirstName);
+	        	messages.put("previousLastName", resultLastName);
+	        	messages.put("previousEmail", resultEmail);
+	        	messages.put("previousPassword", resultPassword);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
