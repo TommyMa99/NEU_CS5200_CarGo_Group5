@@ -41,11 +41,7 @@ public class ConnectionManager {
 	// User to connect to your database instance. By default, this is "root2".
 	private final String user = "root";
 	// Password for the user.
-<<<<<<< HEAD
 	private final String password = "root";
-=======
-	private final String password = "Aptx4869";
->>>>>>> b4991636adcba7486eb96c83953862c01abd2e45
 	// URI to your database server. If running on the same machine, then this is "localhost".
 	private final String hostName = "localhost";
 	// Port to your database server. By default, this is 3307.
