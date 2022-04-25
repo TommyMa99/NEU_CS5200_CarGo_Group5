@@ -10,7 +10,6 @@ import java.util.Date;
  */
 
 public class Buyer extends User{
-    protected int userId;
     protected Date dob;
     protected int zip;
 
@@ -35,15 +34,6 @@ public class Buyer extends User{
         super(userId, firstName, lastName, email, password);
         this.dob = dob;
         this.zip = zip;
-    }
-
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getDob() {
