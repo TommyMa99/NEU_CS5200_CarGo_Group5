@@ -133,14 +133,14 @@ public class SavesDao{
 		List<Cars> cars = new ArrayList<>();
 		String selectCarsFromSaves =
 			"SELECT Saves.Vin,Year,Make,Model,Trim,Body,Transmission,State,Odometer,"
-			+ "CarCondition,Color,Interior,Mmr,SellingPrice,Saves.UserId" +
+			+ "CarCondition,Color,Interior,Mmr,SellingPrice,Cars.UserId" +
 			"FROM Saves INNER JOIN Cars ON Saves.Vin = Cars.Vin " +
 			"WHERE Saves.UserId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		
-		UserDao userDao = UserDao.getInstance();
+		SellerDao sellerDao = SellerDao.getInstance();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectCarsFromSaves);
@@ -162,7 +162,7 @@ public class SavesDao{
 				int mmr = results.getInt("Mmr");
 				int sellingPrice = results.getInt("SellingPrice");
 				int sellerId = results.getInt("UserId");
-				Sellers seller = (Sellers) userDao.getUserByUserId(sellerId);
+				Sellers seller = sellerDao.getSellerByUserId(sellerId);
 				Cars car = new Cars(vin,year,make,model,trim,body,transmission,state,odometer,
 						carCondition,color,interior,mmr,sellingPrice,seller);
 				cars.add(car);
